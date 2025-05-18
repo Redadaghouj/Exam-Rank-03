@@ -8,9 +8,7 @@ int		b_read;
 
 int	gnl()
 {
-	int		b_read;
-
-	b_read = read(STDIN_FILENO, buffer, sizeof(buffer));
+	int b_read = read(STDIN_FILENO, buffer, sizeof(buffer));
 	if (b_read <= 0) return (0);
 	buffer[b_read] = '\0';
 	return (1);
@@ -19,7 +17,6 @@ int	gnl()
 int	check_match(char *s, int i)
 {
 	int	j = 0;
-
 	while (buffer[i] || j < len)
 	{
 		if (buffer[i + j] == s[j]) j++;
@@ -40,7 +37,6 @@ void	transform_phrase(int *i)
 int	filter(char *s)
 {
 	int	i;
-
 	while (gnl())
 	{
 		i = 0;

@@ -2,31 +2,31 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int match_space(FILE *f)
+int match_space(FILE *f) // skip spaces
 {
         // You may insert code here
     return (0);
 }
 
-int match_char(FILE *f, char c)
+int match_char(FILE *f, char c) // match literal
 {
         // You may insert code here
     return (0);
 }
 
-int scan_char(FILE *f, va_list ap)
+int scan_char(FILE *f, va_list ap) // %c
 {
         // You may insert code here
     return (0);
 }
 
-int scan_int(FILE *f, va_list ap)
+int scan_int(FILE *f, va_list ap) // %d
 {
         // You may insert code here
     return (0);
 }
 
-int scan_string(FILE *f, va_list ap)
+int scan_string(FILE *f, va_list ap) // %s
 {
         // You may insert code here
     return (0);
@@ -84,11 +84,12 @@ int ft_vfscanf(FILE *f, const char *format, va_list ap)
     return nconv;
 }
 
-
 int ft_scanf(const char *format, ...)
 {
     va_list ap;
+
+    va_start(ap, format);
     int ret = ft_vfscanf(stdin, format, ap);
-    // ...
+    va_end(ap);
     return ret;
 }
