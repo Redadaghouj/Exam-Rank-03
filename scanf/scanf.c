@@ -10,14 +10,18 @@ int match_space(FILE *f) // skip spaces
 
 int match_char(FILE *f, char c) // match literal
 {
-        // You may insert code here
+    if (c == getc(f))
+        return (1);
     return (0);
 }
 
 int scan_char(FILE *f, va_list ap) // %c
 {
-        // You may insert code here
-    return (0);
+    char c = fgetc(f);
+    if (c == EOF)
+        return (-1);
+    *va_arg(ap, char *) = c;
+    return (1);
 }
 
 int scan_int(FILE *f, va_list ap) // %d
@@ -92,4 +96,15 @@ int ft_scanf(const char *format, ...)
     int ret = ft_vfscanf(stdin, format, ap);
     va_end(ap);
     return ret;
+}
+
+int main()
+{
+    char c;
+    int ret = ft_scanf("--%c", &c);
+    printf("%c\n", c);
+    printf("ret = %d\n", ret);
+    // int ret = scanf("--%c", &c);
+    // printf("%c\n", c);
+    // printf("ret = %d\n", ret);
 }
