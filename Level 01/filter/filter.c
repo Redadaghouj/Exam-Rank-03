@@ -70,6 +70,5 @@ int	main(int argc, char *argv[])
 			return (1);
 		return (0);
 	}
-	printf("\n");
 	return (1);
 }

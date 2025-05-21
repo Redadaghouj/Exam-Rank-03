@@ -2,17 +2,15 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int	ft_isdigit(int c)
-{
-	return (c >= 0 && c <= 9);
-}
-
 int check_sign(FILE *f)
 {
 	int sign = 1;
 	char c = fgetc(f);
-	if (c == '-')
-		sign = -1;
+	if (c == '-' || c == '+')
+	{
+		if (c == '-')
+			sign = -1;
+	}
 	else	
 		ungetc(c, f);
 	return (sign);
@@ -58,7 +56,7 @@ int scan_int(FILE *f, va_list ap) // %d
 	while (1)
 	{
 		c = fgetc(f);
-		if (ft_isdigit(c - '0'))
+		if (isdigit(c))
 			res = res * 10 + (c - '0');
 		else if (c == EOF)
 			return (-1);
@@ -80,7 +78,8 @@ int scan_string(FILE *f, va_list ap) // %s
 	{
 		c = fgetc(f);
 		if (c == EOF) return (-1);
-		else if (c == '\n') break ;
+		else if (c == isspace(c))
+			break ;
 		*s++ = c;
 	}
 	*s = '\0';
@@ -147,4 +146,12 @@ int ft_scanf(const char *format, ...)
 	int ret = ft_vfscanf(stdin, format, ap);
 	va_end(ap);
 	return ret;
+}
+
+int main(void)
+{
+	int nb;
+	int ret = ft_scanf("%d", &nb);
+	printf("nb = %d | ret = %d\n", nb, ret);
+	return (0);
 }
