@@ -5,21 +5,24 @@ char    *argument;
 
 int invalid()
 {
-    int count = 0;
+    int unopened = 0;
+    int unclosed = 0;
 
     for (int i = 0; argument[i]; i++)
     {
         if (argument[i] == '(')
-            count++;
-        if (argument[i] == ')')
         {
-            if (count > 0)
-                count--;
+            unclosed++;
+        }
+        else if (argument[i] == ')')
+        {
+            if (unclosed > 0)
+                unclosed--;
             else
-                count++;
+                unopened++;
         }
     }
-    return (count);
+    return (unopened + unclosed);
 }
 
 void rip(int currently_removed, int pos)
