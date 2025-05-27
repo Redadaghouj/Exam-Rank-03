@@ -35,6 +35,8 @@ int main(int argc, char **argv)
         return (1);
     goal = atoi(argv[1]);
     n = argc-2;
+    if (goal == 0)
+        printf("\n");
     int s[n];
     int nb[n];
     for (int i=0; i<n; i++)
