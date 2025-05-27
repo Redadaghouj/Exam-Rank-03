@@ -5,6 +5,7 @@
 char	buffer[70000];
 int 	len;
 int		b_read;
+int		i;
 
 int	gnl()
 {
@@ -14,7 +15,7 @@ int	gnl()
 	return (1);
 }
 
-int	check_match(char *s, int i)
+int	check_match(char *s)
 {
 	int	j = 0;
 	while (buffer[i] || j < len)
@@ -26,24 +27,23 @@ int	check_match(char *s, int i)
 	else return (0);
 }
 
-void	transform_phrase(int *i)
+void	transform_phrase(void)
 {
 	int j = -1;
 	while (++j < len)
 		printf("*");
-	*(i) += len;
+	i += len;
 }
 
 int	filter(char *s)
 {
-	int	i;
 	while (gnl())
 	{
 		i = 0;
 		while (buffer[i])
 		{
-			if (check_match(s, i))
-				transform_phrase(&i);
+			if (check_match(s))
+				transform_phrase();
 			else printf("%c", buffer[i++]);
 		}
 	}

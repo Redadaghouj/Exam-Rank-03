@@ -18,7 +18,7 @@ void    print_solution(int solution[])
     fprintf(stdout, "\n");
 }
 
-int is_valid(int row, int col, int board[n][n], int solution[])
+int is_valid(int row, int col, int board[n][n])
 {
     int i, j;
     for (i=row-1; i>=0; i--)
@@ -42,7 +42,7 @@ void    n_queens(int row, int board[n][n], int solution[])
     }
     for (int col=0; col<n; col++)
     {
-        if (is_valid(row, col, board, solution))
+        if (is_valid(row, col, board))
         {
             board[row][col] = 1;
             solution[row] = col;

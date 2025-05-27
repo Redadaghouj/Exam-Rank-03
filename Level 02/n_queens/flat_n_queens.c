@@ -2,21 +2,22 @@
 #include <stdlib.h>
 
 int n;
+int *g_board, *g_solution;
 
-void    print_solution(int solution[n])
+void    print_solution()
 {
     for (int i=0; i<n; i++)
-        fprintf(stdout, "%d ", solution[i]);
+        fprintf(stdout, "%d ", g_solution[i]);
     fprintf(stdout, "\n");
 }
 
-int    is_valid(int solution[n], int raw, int col)
+int    is_valid(int raw, int col)
 {
     int q_raw, q_col;
     for (int i=0; i<raw; i++)
     {
         q_raw = i;
-        q_col = solution[i];
+        q_col = g_solution[i];
         if (col == q_col)
             return (0);
         else if (q_raw - q_col == raw - col)
@@ -27,19 +28,19 @@ int    is_valid(int solution[n], int raw, int col)
     return (1);
 }
 
-void    n_queens(int raw, int board[n], int solution[n])
+void    n_queens(int raw)
 {
     if (raw == n)
     {
-        print_solution(solution);
+        print_solution();
         return ;
     }
     for (int col=0; col<n; col++)
     {
-        if (is_valid(solution, raw, col))
+        if (is_valid(raw, col))
         {
-            solution[raw] = col;
-            n_queens(raw+1, board, solution);
+            g_solution[raw] = col;
+            n_queens(raw+1);
         }
     }
 }
@@ -50,6 +51,7 @@ int main(int argc, char **argv)
         return (1);
     n = atoi(argv[1]);
     int board[n], solution[n];
-    n_queens(0, board, solution);
+    g_board = board, g_solution = solution;
+    n_queens(0);
     return (0);
 }

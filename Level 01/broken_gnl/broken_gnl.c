@@ -31,7 +31,7 @@ char    *get_next_line(int fd)
     static char buffer[BUFFER_SIZE];
     char        line[70000];
     static int  b_pos;
-    int         b_read;
+    int         b_read = 0;
     int         i;
 
     i = 0;
