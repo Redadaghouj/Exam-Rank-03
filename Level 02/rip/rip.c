@@ -1,54 +1,50 @@
+
 #include <stdio.h>
 
-int     minimum_to_remove = 0;
-char    *argument;
+int must_fix;
 
-int invalid()
+int is_valid(char *s)
 {
-    int unopened = 0;
-    int unclosed = 0;
+    int unclosed=0, unopened=0;
 
-    for (int i = 0; argument[i]; i++)
+    for (int i=0; s[i]; i++)
     {
-        if (argument[i] == '(')
+        if (s[i] == '(') unclosed++;
+        else if (s[i] == ')')
         {
-            unclosed++;
-        }
-        else if (argument[i] == ')')
-        {
-            if (unclosed > 0)
-                unclosed--;
-            else
-                unopened++;
+            if (unclosed > 0) unclosed--;
+            else unopened++;
         }
     }
-    return (unopened + unclosed);
+    return (unclosed + unopened);
 }
 
-void rip(int currently_removed, int pos)
+void    rip(char *s, int make_change, int pos)
 {
-    if (currently_removed == minimum_to_remove && !invalid())
+    char c;
+
+    if (must_fix == make_change && !is_valid(s))
     {
-        puts(argument);
+        puts(s);
         return ;
     }
-    for (int i = pos; argument[i]; i++)
+    for (int i=pos; s[i]; i++)
     {
-        char c = argument[i];
-        if (argument[i] == '(' || argument[i] == ')')
+        if (s[i] == '(' || s[i] == ')')
         {
-            argument[i] = '_';
-            rip(currently_removed + 1, i + 1);
-            argument[i] = c;
+            c = s[i];
+            s[i] = ' ';
+            rip(s, make_change+1, i+1);
+            s[i] = c;
         }
     }
 }
 
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
-    if (ac != 2)
+    if (argc != 2)
         return (1);
-    argument = av[1];
-    minimum_to_remove = invalid();
-    rip(0, 0);
+    must_fix = is_valid(argv[1]);
+    rip(argv[1], 0, 0);
+    return (0); // (()))( -> (())__ | (()_)_ | ((_))_
 }

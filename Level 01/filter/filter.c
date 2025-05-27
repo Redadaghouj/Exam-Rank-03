@@ -40,16 +40,11 @@ int	filter(char *s)
 	while (gnl())
 	{
 		i = 0;
-		if (s[0] == '\0') 
-			printf("%s", buffer);
-		else
+		while (buffer[i])
 		{
-			while (buffer[i])
-			{
-				if (check_match(s, i))
-					transform_phrase(&i);
-				else printf("%c", buffer[i++]);
-			}
+			if (check_match(s, i))
+				transform_phrase(&i);
+			else printf("%c", buffer[i++]);
 		}
 	}
 	if (b_read < 0)
@@ -66,7 +61,7 @@ int	main(int argc, char *argv[])
 	{
 		(void)argc;
 		len = strlen(argv[1]);
-		if (filter(argv[1]))
+		if (len == 0 || filter(argv[1]))
 			return (1);
 		return (0);
 	}
