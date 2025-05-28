@@ -4,11 +4,12 @@
 #include <math.h>
 #include <string.h>
 #include <stdbool.h>
+#include <sys/_types/_ssize_t.h>
 #include <sys/types.h>
 
+float best_distance = 9999999.9;
 ssize_t size;
 float (*array)[2];
-float best_distance = 9999999.9;
 bool *visited;
 float dist;
 
@@ -18,7 +19,8 @@ float    distance(float a[2], float b[2])
     return sqrtf((b[0] - a[0]) * (b[0] - a[0]) + (b[1] - a[1]) * (b[1] - a[1]));
 }
 
-void   tsp(ssize_t current_city, float current_dist, float check)
+
+void tsp(ssize_t current_city, float_t current_dist, float check)
 {
     if (check == size)
     {
@@ -32,9 +34,9 @@ void   tsp(ssize_t current_city, float current_dist, float check)
         if (visited[i]) continue;
         dist = distance(array[current_city], array[i]);
         if (dist + current_dist >= best_distance) continue;
-        visited[i] = true;
-        tsp(i, dist+current_dist, check+1);
-        visited[i] = false;
+        visited[i] = 1;
+        tsp(i, current_dist + dist, check+1);
+        visited[i] = 0;
     }
 }
 
@@ -109,6 +111,7 @@ int        main(int ac, char **av)
     }
     if (ac > 1)
         fclose(file);
+
     visited = calloc(size, sizeof(bool));
     tsp(0, 0, 0);
     printf("%.2f\n", best_distance);
