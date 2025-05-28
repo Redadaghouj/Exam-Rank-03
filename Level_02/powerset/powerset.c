@@ -5,7 +5,7 @@
 int goal;
 int n;
 int *nbs;
-int printer = 0;
+int flag = 0;
 
 void    print_solution(int s[], int idx)
 {
@@ -13,7 +13,7 @@ void    print_solution(int s[], int idx)
     for (i=0; i<idx-1; i++)
         printf("%d ", s[i]);
     printf("%d\n", s[i]);
-    printer = 1;
+    flag = 1;
 }
 
 void    power_set(int s[], int sum, int idx, int pos)
@@ -34,16 +34,16 @@ int main(int argc, char **argv)
     if (argc <= 2)
         return (1);
     goal = atoi(argv[1]);
-    n = argc-2;
     if (goal == 0)
         printf("\n");
+    n = argc-2;
     int s[n];
     int nb[n];
+    nbs = nb;
     for (int i=0; i<n; i++)
         nb[i] = atoi(argv[i+2]);
-    nbs = nb;
     power_set(s, 0, 0, 0);
-    if (!printer && goal != 0)
+    if (!flag && goal)
         printf("\n");
     return (0);
 }
