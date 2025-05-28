@@ -18,9 +18,9 @@ float    distance(float a[2], float b[2])
     return sqrtf((b[0] - a[0]) * (b[0] - a[0]) + (b[1] - a[1]) * (b[1] - a[1]));
 }
 
-void   tsp(ssize_t current_city, float current_dist, float check)
+void   tsp(ssize_t current_city, float current_dist, float city_count)
 {
-    if (check == size)
+    if (city_count == size)
     {
         current_dist += distance(array[current_city], array[0]);
         if (current_dist < best_distance)
@@ -33,7 +33,7 @@ void   tsp(ssize_t current_city, float current_dist, float check)
         dist = distance(array[current_city], array[i]);
         if (dist + current_dist >= best_distance) continue;
         visited[i] = true;
-        tsp(i, dist+current_dist, check+1);
+        tsp(i, dist+current_dist, city_count+1);
         visited[i] = false;
     }
 }
