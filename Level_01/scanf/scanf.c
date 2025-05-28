@@ -152,11 +152,11 @@ int ft_scanf(const char *format, ...)
 int main(void)
 {
 	char nb[5];
-	int d;
+	int c;
 	// int ret = ft_scanf("%d%s", &d, nb);
-	int ret = ft_scanf("--%c", &d);
+	int ret = ft_scanf("%c", &c);
 	// printf("nb = %s | d = %d\n", nb, d);
-	printf("nb = %c\n", d);
+	printf("c = %c\n", c);
 	printf("ret = %d\n", ret);
 	return (0);
 }
