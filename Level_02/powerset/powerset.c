@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     for (int i=0; i<n; i++)
         nb[i] = atoi(argv[i+2]);
     power_set(s, 0, 0, 0);
-    if (!flag && goal)
+    if (!flag && goal != 0)
         printf("\n");
     return (0);
 }
