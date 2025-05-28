@@ -3,24 +3,26 @@
 
 int must_fix;
 
-int invalid(char *str)
+int invalid(char *s)
 {
-    int unopened=0, unclosed=0;
-    for (int i=0; str[i]; i++)
+    int unclosed=0, unopened=0;
+
+    for (int i=0; s[i]; i++)
     {
-        if (str[i] == '(') unclosed++;
-        else if (str[i] == ')')
+        if (s[i] == '(') unclosed++;
+        else if (s[i] == ')')
         {
             if (unclosed > 0) unclosed--;
             else unopened++;
         }
     }
-    return (unopened + unclosed);
+    return (unclosed + unopened);
 }
 
-void    rip(char *s, int pos, int make_change)
+void    rip(char *s, int make_change, int pos)
 {
     char c;
+
     if (must_fix == make_change && !invalid(s))
     {
         puts(s);
@@ -32,7 +34,7 @@ void    rip(char *s, int pos, int make_change)
         {
             c = s[i];
             s[i] = ' ';
-            rip(s, i+1, make_change+1);
+            rip(s, make_change+1, i+1);
             s[i] = c;
         }
     }
@@ -41,7 +43,7 @@ void    rip(char *s, int pos, int make_change)
 int main(int argc, char **argv)
 {
     if (argc != 2)
-        return 1;
+        return (1);
     must_fix = invalid(argv[1]);
     rip(argv[1], 0, 0);
     return (0);

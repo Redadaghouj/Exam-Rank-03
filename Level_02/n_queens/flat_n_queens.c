@@ -48,7 +48,7 @@ void    n_queens(int raw)
 
 int main(int argc, char **argv)
 {
-    if (argc != 2)
+    if (argc != 2 || atoi(argv[1]) <= 0)
         return (1);
     n = atoi(argv[1]);
     int board[n];

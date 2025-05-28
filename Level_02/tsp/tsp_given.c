@@ -6,61 +6,16 @@
 #include <stdbool.h>
 #include <sys/types.h>
 
-float best_distance;
-float (*cities)[2];
-size_t city_count;
-size_t *path;
-bool *visited;
-float dist;
-
 // compute the distance between two points
 float    distance(float a[2], float b[2])
 {
     return sqrtf((b[0] - a[0]) * (b[0] - a[0]) + (b[1] - a[1]) * (b[1] - a[1]));
 }
 
-void backtrack(size_t count, float current_dist)
-{
-    if (count == city_count) {
-        current_dist += distance(cities[path[count - 1]], cities[path[0]]);
-        if (current_dist < best_distance)
-            best_distance = current_dist;
-        return;
-    }
-    for (size_t i = 0; i < city_count; i++) {
-        if (visited[i]) continue;
-        dist = 0;
-        if (count > 0)
-            dist = distance(cities[path[count - 1]], cities[i]);
-        if (current_dist + dist >= best_distance)
-            continue;
-        visited[i] = true;
-        path[count] = i;
-        backtrack(count + 1, current_dist + dist);
-        visited[i] = false;
-    }
-}
-
-
 float tsp(float (*array)[2], ssize_t size)
 {
-    if (size <= 1) return (0.0f);
-    if (size == 2) return (2 * distance(array[0], array[1]));
-
-    cities = array;
-    city_count = size;
-    best_distance = 99999999.9;
-    visited = calloc(size, sizeof(bool));
-    path = malloc(size * sizeof(size_t));
-
-    // Start backtracking from city 0
-    visited[0] = true;
-    path[0] = 0;
-    backtrack(1, 0);
-
-    // Clean up
-    free(visited);
-    free(path);
+    float best_distance;
+    // ...
     return (best_distance);
 }
 
