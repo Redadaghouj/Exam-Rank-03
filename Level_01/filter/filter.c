@@ -59,7 +59,6 @@ int	main(int argc, char *argv[])
 {
 	if (argc == 2)
 	{
-		(void)argc;
 		len = strlen(argv[1]);
 		if (len == 0 || filter(argv[1]))
 			return (1);
