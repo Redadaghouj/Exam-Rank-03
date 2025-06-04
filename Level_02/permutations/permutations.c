@@ -37,8 +37,7 @@ void permute(char *str, int idx, int used[])
     }
     for (int i=0; i<n; i++)
     {
-        if (used[i])
-            continue ;
+        if (used[i]) continue ;
         str[idx] = arg[i];
         used[i] = 1;
         permute(str, idx + 1, used);
@@ -55,7 +54,7 @@ int main(int argc, char *argv[])
     int used[n];
     for (int i=0; i < n; i++)
         used[i] = 0;
-    char str[n];
+    char str[n + 1];
     str[n] = '\0';
     sort_arr();
     permute(str, 0, used);
